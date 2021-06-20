@@ -1,0 +1,32 @@
+<div style="padding:12px">
+  <h2 mat-dialog-title>Восстановление категории</h2>
+  <mat-dialog-content>
+    <h3>
+      {{ nodeItem.nameRus }}
+    </h3>
+    <div *ngIf="parentNode.isDeleted">
+      <p>
+        Родитель данной категории удален. Выберете другого из списка.
+      </p>
+      <form [formGroup]="categoryRestoreFields">
+        <mat-form-field style="width:80%">
+          <mat-label>Родитель</mat-label>
+          <mat-select formControlName="parentId">
+            <mat-optgroup *ngFor="let group of parentsNodesList" [label]="group.groupName">
+              <mat-option *ngFor="let node of group.groupedParentNodes" [value]="node.id">
+                {{ node.value }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Отмена</button>
+    <button class="mat-raised-button mat-primary" (click)="restore()" [disabled]="parentNode.isDeleted && categoryRestoreFields.invalid">Восстановить</button>
+  </mat-dialog-actions>
+</div>
+
+

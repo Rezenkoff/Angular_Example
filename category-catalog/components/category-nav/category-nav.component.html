@@ -1,0 +1,14 @@
+<div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li *ngFor="let itemNav of path;let last = last;" class="breadcrumb-item" [class.active]="last" aria-current="page">
+        <a [routerLink]="['../category-catalog/node', itemNav.nodePathId]" *ngIf="!last">
+          {{ itemNav.nodePathName }}
+        </a>
+        <span *ngIf="last">{{ itemNav.nodePathName }}</span>
+      </li>
+    </ol>
+  </nav>
+</div>
+
+

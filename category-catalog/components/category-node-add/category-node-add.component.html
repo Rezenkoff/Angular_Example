@@ -1,0 +1,58 @@
+<div style="padding:12px">
+  <h2 mat-dialog-title>Создание категории</h2>
+
+  <mat-dialog-content>
+
+    <form [formGroup]="categoryFields">
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Родитель" formControlName="parentId">       
+
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Название на русском" formControlName="nameRus">
+
+          <div *ngIf="nameRus.invalid && (nameRus.dirty || nameRus.touched)">
+            <mat-error *ngIf=" nameRus.errors.minlength">Не меньше: 4</mat-error>
+            <mat-error *ngIf=" nameRus.errors.minlength">Не более: 200</mat-error>
+            <mat-error *ngIf="nameRus.errors.required">Поле обязатально</mat-error>
+            <mat-error *ngIf="nameRus.errors.notunique">Имя не уникально</mat-error>
+          </div>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Название на украинском" formControlName="nameUkr">
+
+          <div *ngIf="nameUkr.invalid && (nameUkr.dirty || nameUkr.touched)">
+            <mat-error *ngIf="nameUkr.errors.minlength">Не меньше: 4</mat-error>
+            <mat-error *ngIf="nameUkr.errors.minlength">Не более: 200</mat-error>
+            <mat-error *ngIf="nameUkr.errors.required">Поле обязатально</mat-error>
+            <mat-error *ngIf="nameUkr.errors.notunique">Имя не уникально</mat-error>
+          </div>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Url картинки для отображения" formControlName="imageUrl">
+
+          <div *ngIf="imageUrl.invalid && (imageUrl.dirty || imageUrl.touched)">            
+            <mat-error *ngIf="imageUrl.errors.pattern">Это не верный URL</mat-error>
+            <mat-error *ngIf="imageUrl.errors.required">Поле обязатально</mat-error>
+          </div>
+        </mat-form-field>
+      </p>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="buttons-preview">
+      <button class="btn btn-danger" (click)="close()">Отмена</button>
+      <button class="btn btn-primary" (click)="save()" [disabled]="categoryFields.invalid">Создать</button>
+    </div>
+  </mat-dialog-actions>
+</div>
+
+

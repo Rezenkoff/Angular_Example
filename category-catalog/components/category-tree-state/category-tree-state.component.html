@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-2">
+    <p>
+      <span class="badge">Версия: {{ categoryTreeState.currentState.CatalogVersion }}</span>
+    </p>
+    <p>
+      <span>Режим: {{ categoryTreeState.currentState.Mode }}</span>
+    </p>
+  </div>
+  <div class="col-md-2">
+    <p>
+      <span>Версия бєкап: {{ categoryTreeState.currentState.backupVersion }}</span>
+    </p>
+    <button class="btn btn-primary" (click)="restoreFromBackUp()" [disabled]="canBeRestored()">Вернуть пред. версию</button>
+  </div>
+  <div class="col-md-8 buttons-preview">
+    <button class="btn btn-secondary" (click)="openTreePreview()">Просмотр</button>
+    <button class="btn btn-success">Загрузка с Excel</button>
+    <button class="btn btn-info" [disabled]="categoryTreeState.currentState.IsEditMode" (click)="enableEditMode()">Редактировать</button>
+    <button class="btn btn-warning" (click)="validateCatalog()">Валидировать</button>
+    <button class="btn btn-primary" [disabled]="!categoryTreeState.currentState.validation.valid" (click)="applyNewTreeStucture()">Применить</button>
+    <button class="btn btn-primary" (click)="cancelEditCatalog()">Отменить</button>
+  </div>
+</div>

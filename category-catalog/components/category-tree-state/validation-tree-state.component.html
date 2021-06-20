@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <div>
+    <h3>{{ validationData.errorTitle }}</h3>
+    <div *ngIf="validationData.invalidNodesList">
+      <p>Id категорий с ошибками</p>
+      <span *ngFor="let nodeId of validationData.invalidNodesList">
+        {{ nodeId }},
+      </span>
+    </div>
+    <div *ngIf="validationData.invalidNodesNameList">
+      <p>Имена категорий с ошибками</p>
+      <span *ngFor="let nodeName of validationData.invalidNodesNameList">
+        {{ nodeName }},
+      </span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="close()">Закрыть</button>
+</mat-dialog-actions>

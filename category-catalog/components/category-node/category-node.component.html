@@ -1,0 +1,50 @@
+<div *ngIf="!isLoading" class="container">
+  <div class="row">
+    <div class="">
+      <div *ngIf="currentNode.parentNode">
+        <div class="category-node-parent">
+          {{ currentNode.parentNode.nameRus }}
+        </div>
+      </div>
+    </div>
+    <div>
+      <table class="table" >
+        <tbody>
+          <tr *ngFor="let item of currentNode.nodeChildren" [style.background-color]="item.isDeleted ? 'lightgray' : 'white'">
+            <td>
+              <a class="category-link" [routerLink]="['../', item.nodeId]">{{ item.nameRus }}</a>
+            </td>
+            <td >
+              <div class="buttons-preview">
+                <button *ngIf="!item.isDeleted" class="btn btn-danger btn-sm" (click)="openDeleteDialog(item)" [disabled]="!categoryTreeState.currentState.IsEditMode">Удалить</button>
+                <button *ngIf="item.isDeleted" class="btn btn-warning btn-sm" (click)="openRestoreDialog(item)" [disabled]="!categoryTreeState.currentState.IsEditMode">Восс-ть</button>
+                <button class="btn btn-info btn-sm" (click)="openEditDialog(item)" [disabled]="item.isDeleted || !categoryTreeState.currentState.IsEditMode">Редактировать</button>
+                <category-articles-view [node]="item"></category-articles-view>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>      
+
+      <div class="row" *ngIf="currentNode.nodeChildren.length <= 0">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">          
+          <category-articles-view [node]="currentNode.parentNode"></category-articles-view>
+        </div>        
+      </div>
+                    
+      <div>
+        <button [disabled]="canAddChild() || !categoryTreeState.currentState.IsEditMode"  (click)="openAddDialog()" class="btn btn-success btn-add-ctegory">Добавить категорию</button>
+      </div>
+             
+    </div>
+  </div>
+</div>
+<div *ngIf="isLoading" class="container__row">
+  <div class="autodoc-loader"></div>
+</div>
+
+
+
+

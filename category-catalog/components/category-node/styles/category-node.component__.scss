@@ -1,0 +1,31 @@
+.buttons-preview .btn{
+    margin-right: 10px;
+}
+.category-link{
+    font-size: 14px;
+    line-height: 21px;
+    text-decoration: none;
+    color: #1d5495;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.category-node-parent{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: #777;
+    margin: 15px 0;
+
+}
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}
+.btn-add-ctegory{
+    margin-top: 15px;
+}

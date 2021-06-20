@@ -1,0 +1,23 @@
+<div style="overflow: hidden;">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field style="width:500px">
+        <mat-label>Поиск по Id и названию</mat-label>
+        <input matInput [(ngModel)]="searchText" (ngModelChange)="changeSearchText()" type="text" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of foundNodes" (click)="navigateToNode(option.nodeId)">
+            Id:{{ option.nodeId }} {{ option.nameRus }} | {{ option.nameUkr }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="col-md-8">
+      <category-tree-state></category-tree-state>
+    </div>
+  </div>
+
+  <div>
+    <category-nav></category-nav>
+  </div>
+  <router-outlet></router-outlet>
+</div>

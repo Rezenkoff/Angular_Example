@@ -1,0 +1,47 @@
+<div style="padding:12px">
+  <h2 mat-dialog-title>Артикль {{ article.articleId }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="articleEditFields">
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Название на русском" formControlName="articleName">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Название на украинском" formControlName="articleNameUkr">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field style="width:80%">
+          <mat-label>Номер карточки товара</mat-label>
+          <input matInput disabled [value]="article.cardNumber">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width" style="width:800px;">
+          <mat-label>Описание артикля</mat-label>
+          <textarea matInput placeholder="Описание артикля" formControlName="articleInfo"></textarea>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field style="width:80%">
+          <input matInput placeholder="Ед измерения" formControlName="measure">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-slide-toggle class="example-margin" formControlName="articleIsActive">
+          Активен
+        </mat-slide-toggle>
+      </p>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Отмена</button>
+    <button class="mat-raised-button mat-primary" (click)="save()" [disabled]="articleEditFields.invalid">Сохранить</button>
+  </mat-dialog-actions>
+</div>
+

@@ -1,0 +1,82 @@
+<div class="container">
+  <div>
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>Тип артикля</mat-label>
+        <mat-select [(ngModel)]="selectedTypeValue" name="articleType" (selectionChange)="typeChanged($event)">
+          <mat-option *ngFor="let type of typesArt" [value]="type.typeId">
+            {{ type.typeName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span>
+        Всего артиклей для данной категории: {{ totalArticles }}
+      </span>
+    </form>
+    <table mat-table [dataSource]="dataSourceArticles" class="mat-elevation-z8">
+      <ng-container matColumnDef="articleId">
+        <th mat-header-cell *matHeaderCellDef> Артикул </th>
+        <td mat-cell *matCellDef="let element"> <a (click)="openArticleCard(element)">{{ element.articleId }}</a> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="articleType">
+        <th mat-header-cell *matHeaderCellDef> Тип </th>
+        <td mat-cell *matCellDef="let element"> {{ element.articleType }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="articleName">
+        <th mat-header-cell *matHeaderCellDef> Название Рус. </th>
+        <td mat-cell *matCellDef="let element"> {{ element.articleName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="articleIsActive">
+        <th mat-header-cell *matHeaderCellDef> Активность </th>
+        <td mat-cell *matCellDef="let element"> {{ element.articleIsActive }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="articleSupplierId">
+        <th mat-header-cell *matHeaderCellDef> SupplierId </th>
+        <td mat-cell *matCellDef="let element"> {{ element.articleSupplierId }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cardNumber">
+        <th mat-header-cell *matHeaderCellDef> Карточка </th>
+        <td mat-cell *matCellDef="let element"> {{ element.cardNumber }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="articleInfo">
+        <th mat-header-cell *matHeaderCellDef> Инфо </th>
+        <td mat-cell *matCellDef="let element"> {{ element.articleInfo }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="measure">
+        <th mat-header-cell *matHeaderCellDef> Ед.Изм. </th>
+        <td mat-cell *matCellDef="let element"> {{ element.measure }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="articleNameUkr">
+        <th mat-header-cell *matHeaderCellDef> Название Укр. </th>
+        <td mat-cell *matCellDef="let element"> {{ element.articleNameUkr }} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+    <div>
+      Загрузить из файла *.csv (формат articleId;typeId) <span style="font-size:18px;">{{ fileName }}</span>
+      <span class="upload">
+        <mat-progress-bar class="example-margin" [value]="progress" style="width:290px;">
+        </mat-progress-bar>
+      </span>
+      <div class="buttons-preview article-btn">
+        <button class="btn btn-primary" type="button" (click)="onOpenFileClick()">Выберите файл</button>
+        <input hidden style="width: 300px;height: 50px;display: none;" (change)="onFileSelected(fileInput.files)" #fileInput type="file" id="file">
+        <button class="btn btn-primary" (click)="onFileProccescClick()" [disabled]="progress <= 0">Обработать файл</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
